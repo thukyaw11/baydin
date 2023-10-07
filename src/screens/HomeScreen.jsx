@@ -7,6 +7,7 @@ import DynamicHeader from '../components/dynamicHeader'
 
 export default function HomeScreen({route, navigation}) {
     const scrollOffsetY = useRef(new Animated.Value(0)).current;
+    TouchableOpacity.defaultProps = {...(TouchableOpacity.defaultProps || {}), delayPressIn: 0};
 
     const gotoBaydinView = (question) => {
         navigation.navigate("Baydin View Screen", {
@@ -31,8 +32,7 @@ export default function HomeScreen({route, navigation}) {
                 {
                     questions.map(val => {
                         return (
-
-                            <TouchableOpacity onPress={() => gotoBaydinView(val)} key={val.questionNo}>
+                            <TouchableOpacity onPress={() => gotoBaydinView(val)} key={val.questionNo} activeOpacity={0.7}>
                                 <View style={styles.card} >
                                     <Text style={styles.subtitle} >🍀 {val.questionName}</Text>
                                 </View>
@@ -59,7 +59,9 @@ const styles = StyleSheet.create({
     },
     subtitle: {
         color: '#181D31',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontSize: 15,
+        lineHeight: 40
     },
   
     headerImg: {
